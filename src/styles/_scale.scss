@@ -1,0 +1,32 @@
+// Modular Scale
+// (overlapping octaves)
+// S: 12, 24, 48, 96
+// M: 16, 32, 64, 128
+// L: 20, 40, 80, 160
+
+@function toRem($px) {
+  @return #{$px / 16}rem;
+}
+
+// sub-scale values
+$x0--s: toRem(2);
+$x0--m: toRem(4);
+$x0--l: toRem(8);
+// Base
+$x1--s: toRem(12);
+$x1--m: toRem(16);
+$x1--l: toRem(20);
+// +1 Octave
+$x2--s: toRem(24);
+$x2--m: toRem(32);
+$x2--l: toRem(40);
+// +2 Octaves
+$x4--s: toRem(48);
+$x4--m: toRem(64);
+$x4--l: toRem(80);
+// +3 Octaves
+$x8--s: toRem(96);
+$x8--m: toRem(128);
+$x8--l: toRem(160);
+
+$base: $x1--m;
