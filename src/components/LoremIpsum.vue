@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import Generators, { names as DICTIONARIES } from '../data/vocab'
+import Generators, { names as DICTIONARIES } from '../dictionaries'
 
 export {
   DICTIONARIES,

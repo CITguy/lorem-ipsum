@@ -1,5 +1,5 @@
 {
-  "phrase": [
+  "sentence": [
     "After inspecting the {{adjective}} {{noun}} {{noun}}, we discovered that the {{noun}} of the {{adjective}} {{noun}} isn't {{verbing}} {{preposition}} the {{noun}}.",
     "We fixed the {{adjective}} {{noun}} {{noun}} as a result of the {{adjective}} {{noun}} {{verbing}} {{preposition}} the {{noun}}.",
     "We need to replace the {{adjective}} {{noun}} {{noun}} because the {{adjective}} {{noun}} isn't {{verbing}} {{preposition}} the {{noun}}.",
@@ -229,7 +229,7 @@
     "wheel",
     "wiper"
   ],
-  "pluralNoun": [
+  "nouns": [
     "airbags",
     "alarms",
     "alternators",

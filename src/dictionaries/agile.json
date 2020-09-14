@@ -1,5 +1,5 @@
 {
-  "phrase": [
+  "sentence": [
     "As a user, I should be able to {{verb}} the {{adjective}} {{noun}} so that I can {{verb}} the {{adjective}} {{abbr}} {{nouns}} {{preposition}} the {{adjective}} {{nouns}}.",
     "Given {{adjective}} {{nouns}}, {{adverb}} {{verbing}} the {{adjective}} {{noun}} {{preposition}} the {{adjective}} {{noun}} will {{adverb}} {{verb}} the {{adjective}} {{noun}}.",
     "{{verbing}} the {{nouns}} should allow our {{noun}} to {{verb}} the {{adjective}} {{noun}} {{preposition}} the {{noun}}.",

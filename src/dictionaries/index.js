@@ -1,4 +1,4 @@
-import Lorem from '../../services/lorem'
+import Lorem from '../../lib/lorem'
 
 import agile from './agile.json'
 import autoMechanic from './auto-mechanic.json'

@@ -1,8 +1,7 @@
 <template>
   <footer class="app-footer">
-    <div class="right">
-      <a href="">v{{version}}</a>
-    </div>
+    v{{version}} ({{license}}) |
+    <a href="https://github.com/CITguy/lorem-ipsum">source</a>
   </footer>
 </template>
 
@@ -14,6 +13,7 @@ export default {
   data() {
     return {
       version: pkg.version,
+      license: pkg.license,
     }
   }
 }
@@ -22,12 +22,13 @@ export default {
 <style lang="scss">
 .app-footer {
   background-color: #eee;
+  border-top: 1px solid #ccc;
   bottom: 0;
+  box-shadow: 0 -4px 4px rgba(0, 0, 0, 0.07);
   font-size: 0.75rem;
   font-weight: 300;
   padding: 1rem 2rem;
   position: sticky;
-  box-shadow: 0 -4px 4px rgba(0, 0, 0, 0.07);
-  border-top: 1px solid #ccc;
+  text-align: center;
 }
 </style>
