@@ -1,3 +1,18 @@
 @use "@/styles/scale";
 
 $ctrlHeight: scale.$x2--m;
+
+$maxLine: 80ch;
+
+$borderColor: #ddd;
+
+// ----- BREAKPOINTS -----
+// Mobile
+$break-mobile-lg: 24rem; // 384px
+// Tablet
+$break-tablet: 30rem; // 480px;
+$break-tablet-sm: $break-tablet; // alias
+$break-tablet-lg: 40rem; // 640px
+// Desktop
+$break-desktop: 60rem; // 960px;
+$break-desktop-sm: $break-desktop; // alias

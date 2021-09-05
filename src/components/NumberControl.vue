@@ -9,6 +9,11 @@
     </Button>
 
     <!-- hide -->
+    <!-- TODO:
+      type="text"
+      inputmode="numeric"
+      pattern="\d+"
+    -->
     <input
       :id="id"
       :min="min"
@@ -52,7 +57,6 @@ $width: scale.$x4--m;
   > .ui-button {
     border-radius: 0;
     width: 2rem;
-    //padding: 0;
 
     &:disabled {
       cursor: not-allowed;
@@ -62,6 +66,7 @@ $width: scale.$x4--m;
   .number-decrement {
     grid-area: less;
   }
+
   .number-increment {
     grid-area: more;
   }

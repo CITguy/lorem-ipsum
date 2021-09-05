@@ -1,13 +1,11 @@
-import Lorem from '../../lib/lorem'
-
 import agile from './agile.json'
 import autoMechanic from './auto-mechanic.json'
+import marklar from './marklar.json'
 
-const INDEX = {
-  'Agile': new Lorem(agile),
-  'Auto Mechanic': new Lorem(autoMechanic)
-}
+const DICTIONARIES = [
+  agile,
+  autoMechanic,
+  marklar,
+].sort((a, b) => a.name > b.name )
 
-export const names = Object.keys(INDEX).sort()
-
-export default INDEX
+export default DICTIONARIES

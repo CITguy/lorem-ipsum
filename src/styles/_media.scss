@@ -1,0 +1,37 @@
+@use "./vars" as *;
+
+// MOBILE
+@mixin mobile-lg {
+  @media (min-width: $break-mobile-lg) {
+    @content;
+  }
+}
+
+// TABLET
+@mixin tablet {
+  @media (min-width: $break-tablet) {
+    @content;
+  }
+}
+@mixin tablet-sm {
+  @include tablet {
+    @content;
+  }
+}
+@mixin tablet-lg {
+  @media (min-width: $break-tablet-lg) {
+    @content;
+  }
+}
+
+// DESKTOP
+@mixin desktop {
+  @media (min-width: $break-desktop) {
+    @content;
+  }
+}
+@mixin desktop-sm {
+  @include desktop {
+    @content;
+  }
+}

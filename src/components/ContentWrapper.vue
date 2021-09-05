@@ -5,8 +5,8 @@
 </template>
 
 <style lang="scss">
-.content-wrapper {
-  margin: 0 auto;
-  max-width: 80ch;
-}
+  .content-wrapper {
+    margin: 0 auto;
+    max-width: 80ch;
+  }
 </style>

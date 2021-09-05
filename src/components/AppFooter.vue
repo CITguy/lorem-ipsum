@@ -1,34 +1,53 @@
 <template>
   <footer class="app-footer">
-    v{{version}} ({{license}}) |
-    <a href="https://github.com/CITguy/lorem-ipsum">source</a>
+    <div class="app-footer__content">
+      <div>
+        &copy;{{year}} {{author}}
+      </div>
+
+      <div>
+        v{{version}}
+        (<a href="https://github.com/CITguy/lorem-ipsum">source</a>)
+      </div>
+    </div>
   </footer>
 </template>
 
 <script>
-import pkg from '../../package.json'
+  import { version, author } from '../../package.json'
 
-export default {
-  name: 'AppFooter',
-  data() {
-    return {
-      version: pkg.version,
-      license: pkg.license,
-    }
+  export default {
+    name: 'AppFooter',
+    data: () => ({
+      author,
+      version,
+    }),
+    computed: {
+      year: () => new Date().getFullYear()
+    },
   }
-}
 </script>
 
 <style lang="scss">
-.app-footer {
-  background-color: #eee;
-  border-top: 1px solid #ccc;
-  bottom: 0;
-  box-shadow: 0 -4px 4px rgba(0, 0, 0, 0.07);
-  font-size: 0.75rem;
-  font-weight: 300;
-  padding: 1rem 2rem;
-  position: sticky;
-  text-align: center;
-}
+  /* LAYOUT */
+  .app-footer {
+    padding: 1.5rem;
+    text-align: center;
+
+    &__content {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 auto;
+      max-width: 80ch;
+    }
+  }
+
+  /* APPEARANCE */
+  .app-footer {
+    background-color: #eee;
+    border-top: 1px solid #ccc;
+    box-shadow: 0 -4px 4px rgba(0, 0, 0, 0.07);
+    font-size: 0.75rem;
+    font-weight: 300;
+  }
 </style>

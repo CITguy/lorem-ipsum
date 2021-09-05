@@ -1,6 +1,7 @@
 {
   "name": "lorem-ipsum",
-  "version": "0.1.0",
+  "version": "0.2.0",
+  "author": "Ryan Johnson",
   "private": true,
   "license": "GPLv3",
   "scripts": {
