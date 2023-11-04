@@ -17,8 +17,8 @@
 </script>
 
 <style lang="scss">
-  @use "@/styles/media" as Media;
-  @use "@/styles/vars" as *;
+  @use "src/styles/media" as Media;
+  @use "src/styles/vars" as *;
 
   $gap: 1.5rem;
 

@@ -8,7 +8,7 @@
 </template>
 
 <style lang="scss">
-  @use "@/styles/media" as Media;
+  @use "src/styles/media" as Media;
 
   /* LAYOUT */
   .ui-button {

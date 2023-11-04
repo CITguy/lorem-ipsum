@@ -36,7 +36,7 @@
 </template>
 
 <style lang="scss">
-@use "@/styles/scale";
+@use "src/styles/scale";
 
 $width: scale.$x4--m;
 .number-control {
