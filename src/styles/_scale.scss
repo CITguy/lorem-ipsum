@@ -1,3 +1,5 @@
+@use "sass:math";
+
 // Modular Scale
 // (overlapping octaves)
 // S: 12, 24, 48, 96
@@ -5,7 +7,7 @@
 // L: 20, 40, 80, 160
 
 @function toRem($px) {
-  @return #{$px / 16}rem;
+  @return #{math.div($px, 16)}rem;
 }
 
 // sub-scale values

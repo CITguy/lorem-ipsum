@@ -1,6 +1,7 @@
 # lorem-ipsum
 
+```sh
+npm install
+npm run dev
 ```
-yarn install
-yarn start
-```
+
