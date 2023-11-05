@@ -1,3 +1,9 @@
+<script setup>
+  import { version, author } from '../../package.json'
+
+  const year = new Date().getFullYear()
+</script>
+
 <template>
   <footer class="app-footer">
     <div class="app-footer__content">
@@ -12,21 +18,6 @@
     </div>
   </footer>
 </template>
-
-<script>
-  import { version, author } from '../../package.json'
-
-  export default {
-    name: 'AppFooter',
-    data: () => ({
-      author,
-      version,
-    }),
-    computed: {
-      year: () => new Date().getFullYear()
-    },
-  }
-</script>
 
 <style lang="scss">
   /* LAYOUT */

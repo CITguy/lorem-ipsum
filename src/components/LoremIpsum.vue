@@ -1,134 +1,148 @@
+<script setup>
+  import { ref, watch, computed } from 'vue'
+  import Lorem from '../../lib/lorem'
+  // Vue Components
+  import Button from './Button.vue'
+  import ContentWrapper from './ContentWrapper.vue'
+
+
+  const DEFAULT = {
+    copyStatus: '',
+    paragraphs: [],
+  }
+
+  // ----- PROPS -----
+  const props = defineProps({
+    addIntro: Boolean,
+    dictionary: Object,
+    paragraphCount: Number,
+    timestamp: Date,
+  })
+
+  // ----- DATA (refs) -----
+  const blockquote = ref(null) // template ref
+  const copyStatus = ref(DEFAULT.copyStatus)
+  const paragraphs = ref(DEFAULT.paragraphs)
+
+
+  // ----- COMPUTED (refs) -----
+  const _timestamp = computed(() => {
+    return (props.timestamp || new Date())
+  })
+
+
+  // ----- WATCHERS -----
+  watch(_timestamp, () => {
+    _unselectText()
+    _reset()
+    _generate()
+  })
+
+
+  // ----- METHODS -----
+  function _reset() {
+    copyStatus.value = DEFAULT.copyStatus
+    paragraphs.value = DEFAULT.paragraphs
+  }
+
+  function _generate() {
+    let _paragraphs = []
+    let limit = props.paragraphCount
+    let lorem = new Lorem(props.dictionary)
+
+    while(limit--) {
+      _paragraphs.push(lorem.paragraph)
+    }
+
+    if (props.addIntro) {
+      let intro = lorem.intro
+      if (intro) {
+        // prepend intro to first paragraph
+        let p = _paragraphs[0]
+        p = `${intro}  ${p}`
+        _paragraphs[0] = p
+      }
+    }
+
+    paragraphs.value = _paragraphs
+  }
+
+  function _unselectText() {
+    let selection = window.getSelection()
+    selection.removeAllRanges()
+  }
+
+  function selectText() {
+    _unselectText()
+    let elementNode = blockquote.value
+    let range = document.createRange()
+    let selection = window.getSelection()
+
+    // Add all generated text to the range
+    range.selectNodeContents(elementNode)
+
+    // Apply text selection to window
+    selection.addRange(range)
+  }
+
+  async function copyText() {
+    let _toClipboard = paragraphs.value.join('\n\n')
+    copyStatus.value = ''
+
+    try {
+      await window.navigator.clipboard.writeText(_toClipboard)
+      copyStatus.value = 'Success!'
+    } catch (e) {
+      copyStatus.value = 'Unable to copy'
+    }
+
+    setTimeout(() => {
+      copyStatus.value = ''
+    }, 3000)
+  }
+</script>
+
 <template>
   <ContentWrapper v-if="timestamp" class="lorem-ipsum">
+    <div class="action-bar">
+      <Button @click="copyText">Copy text</Button>
+      <span class="copy-status">{{ copyStatus }}</span>
+      <!--
+      <Button @click="selectText">Select text</Button>
+      -->
+    </div>
     <blockquote ref="blockquote">
       <p v-for="(paragraph, idx) in paragraphs" :key="idx">
         {{paragraph}}
       </p>
     </blockquote>
-
-    <div class="button-bar">
-      <Button @click="highlightText">Select Text</Button>
-      <!--
-      <Button @click="copyText">Copy Text</Button>
-      -->
-    </div>
   </ContentWrapper>
 </template>
 
-<script>
-  import Button from './Button.vue'
-  import ContentWrapper from './ContentWrapper.vue'
-  import Lorem from '../../lib/lorem'
-  import Dictionaries from '../dictionaries'
-
-  // named exports
-  export {
-    Dictionaries
-  }
-
-  // default export
-  export default {
-    name: 'LoremIpsum',
-    components: {
-      Button,
-      ContentWrapper,
-    },
-    props: {
-      addIntro: Boolean,
-      dictionary: Object,
-      paragraphCount: Number,
-      timestamp: Date,
-    },
-    data: () => ({
-      paragraphs: [],
-    }),
-    watch: {
-      timestamp() {
-        this.unselectText()
-        this.generate()
-      },
-    },
-    methods: {
-      generate() {
-        let _paragraphs = []
-        let limit = this.paragraphCount
-        let lorem = new Lorem(this.dictionary)
-
-        while(limit--) {
-          _paragraphs.push(lorem.paragraph)
-        }
-
-        if (this.addIntro) {
-          let intro = lorem.intro
-          if (intro) {
-            // prepend intro to first paragraph
-            let p = _paragraphs[0]
-            p = `${intro}  ${p}`
-            _paragraphs[0] = p
-          }
-        }
-
-        this.paragraphs = _paragraphs
-      },
-      unselectText() {
-        let selection = window.getSelection()
-        selection.removeAllRanges()
-      },
-      highlightText() {
-        this.unselectText()
-        let elementNode = this.$refs.blockquote
-        let range = document.createRange()
-        let selection = window.getSelection()
-
-        // Add all generated text to the range
-        range.selectNodeContents(elementNode)
-
-        // Apply text selection to window
-        selection.addRange(range)
-      },
-      copyText() {
-        // TODO...
-      },
-    },
-  }
-</script>
-
 <style lang="scss">
-  @use "src/styles/media" as Media;
-
   /* LAYOUT */
   .lorem-ipsum {
     display: flex;
     flex-direction: column;
     line-height: 1.5;
     padding: 2rem;
+    gap: 2em 0;
 
-    > * {
+    > blockquote {
       margin: 0;
     }
 
-    > * + * {
-      margin-block-end: 2em;
+    .action-bar {
+      align-items: baseline;
+      display: flex;
+      gap: 8px;
+      justify-content: space-between;
     }
 
-    > blockquote {
-      order: 2;
+    .copy-status {
+      flex-grow: 1;
+      font-size: 0.75em;
+      opacity: 0.75;
     }
-
-    > .button-bar {
-      display: none;
-      order: 1;
-    }
-
-    @include Media.desktop {
-      .button-bar {
-        display: block;
-      }
-    }
-  }
-
-  /* APPEARANCE */
-  .lorem-ipsum {
-    /* TBD... */
   }
 </style>

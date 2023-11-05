@@ -1,11 +1,47 @@
+<script setup>
+  import { ref, watch, computed } from 'vue'
+  import Dictionaries from '../dictionaries'
+  // Components
+  import AppFooter from './AppFooter.vue'
+  import AppHeader from './AppHeader.vue'
+  import Button from './Button.vue'
+  import CheckboxControl from './CheckboxControl.vue'
+  import FieldLabel from './FieldLabel.vue'
+  import FormField from './FormField.vue'
+  import GeneratorForm from './GeneratorForm.vue'
+  import LoremIpsum from './LoremIpsum.vue'
+  import NumberControl from './NumberControl.vue'
+  import SelectControl from './SelectControl.vue'
+
+  // ----- DATA (refs) -----
+  const addIntro = ref(false)
+  const dictionaries = ref(Dictionaries)
+  const dictionary = ref(Dictionaries[0])
+  const generatedAt = ref(null)
+  const numParagraphs = ref(1)
+
+  // ----- WATCHERS -----
+  watch(dictionary, () => {
+    generatedAt.value = null
+  })
+
+  // ----- COMPUTED -----
+  const canAddIntro = computed(() => {
+    return ('intro' in dictionary.value.vocab)
+  })
+
+  function generate() {
+    generatedAt.value = new Date()
+  }
+</script>
+
 <template>
   <div class="app">
     <AppHeader class="app__header" />
     <div class="app__body">
-      <!-- IpsumForm -->
       <GeneratorForm @submit.prevent="generate">
         <FormField class="dict">
-          <label for="selDictionary">Dictionary</label>
+          <FieldLabel for="selDictionary">Dictionary</FieldLabel>
           <SelectControl>
             <select id="selDictionary" v-model="dictionary">
               <option v-for="(_dict, idx) in dictionaries" :key="idx" :value="_dict">
@@ -16,7 +52,7 @@
         </FormField>
 
         <FormField class="paragraphs">
-          <label for="numParagraphs">Paragraphs</label>
+          <FieldLabel for="numParagraphs">Paragraphs</FieldLabel>
           <NumberControl
             id="numParagraphs"
             v-model.number="numParagraphs"
@@ -31,7 +67,7 @@
               v-model="addIntro"
               :disabled="!canAddIntro"
             />
-            <label for="chkOpener">Add Intro?</label>
+            <FieldLabel for="chkOpener">Add Intro?</FieldLabel>
           </CheckboxControl>
         </FormField>
 
@@ -41,64 +77,15 @@
       </GeneratorForm>
 
       <LoremIpsum
-        :paragraphCount="numParagraphs"
+        :addIntro="addIntro"
         :dictionary="dictionary"
         :timestamp="generatedAt"
-        :addIntro="addIntro"
+        :paragraphCount="numParagraphs"
       />
     </div>
     <AppFooter class="app__footer" />
   </div>
 </template>
-
-<script>
-  import AppFooter from './AppFooter.vue'
-  import AppHeader from './AppHeader.vue'
-  import Button from './Button.vue'
-  import CheckboxControl from './CheckboxControl.vue'
-  import FormField from './FormField.vue'
-  import GeneratorForm from './GeneratorForm.vue'
-  import LoremIpsum, { Dictionaries } from './LoremIpsum.vue'
-  import NumberControl from './NumberControl.vue'
-  import SelectControl from './SelectControl.vue'
-
-  export default {
-    name: 'App',
-    components: {
-      AppFooter,
-      AppHeader,
-      Button,
-      CheckboxControl,
-      FormField,
-      GeneratorForm,
-      LoremIpsum,
-      NumberControl,
-      SelectControl,
-    },
-    data: () => ({
-      addIntro: false,
-      dictionaries: Dictionaries,
-      dictionary: Dictionaries[0],
-      generatedAt: null,
-      numParagraphs: 1,
-    }),
-    watch: {
-      dictionary() {
-        this.generatedAt = null
-      },
-    },
-    computed: {
-      canAddIntro() {
-        return ('intro' in this.dictionary.vocab)
-      },
-    },
-    methods: {
-      generate() {
-        this.generatedAt = new Date()
-      },
-    },
-  }
-</script>
 
 <style lang="scss">
   html {

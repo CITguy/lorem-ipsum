@@ -19,6 +19,7 @@
     justify-content: center;
     margin: 0;
     padding: 0 1.25rem;
+    white-space: nowrap;
     width: 100%;
 
     @include Media.mobile-lg {
@@ -43,13 +44,15 @@
     font-weight: 500;
     transition: box-shadow 0.35s;
 
-    &:hover {
-      background-color: #f5f5f5;
-      border-color: #999;
-    }
+    &:enabled {
+      &:hover {
+        background-color: #f5f5f5;
+        border-color: #999;
+      }
 
-    &:active {
-      background-color: #ddd;
+      &:active {
+        background-color: #ddd;
+      }
     }
 
     &:disabled {
