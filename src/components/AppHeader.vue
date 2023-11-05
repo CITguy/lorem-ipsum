@@ -1,3 +1,7 @@
+<script setup>
+  import ContentWrapper from './ContentWrapper.vue'
+</script>
+
 <template>
   <header class="app-header">
     <ContentWrapper>
@@ -5,16 +9,6 @@
     </ContentWrapper>
   </header>
 </template>
-
-<script>
-  import ContentWrapper from './ContentWrapper.vue'
-  export default {
-    name: 'AppHeader',
-    components: {
-      ContentWrapper,
-    },
-  }
-</script>
 
 <style lang="scss">
   @use "src/styles/media" as Media;

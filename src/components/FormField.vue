@@ -9,13 +9,6 @@
     align-items: flex-start;
     display: flex;
     flex-direction: column;
-
-    > * + * {
-      margin-block-start: 0.25rem;
-    }
-
-    > label {
-      font-weight: 600;
-    }
+    gap: 0.25rem 0;
   }
 </style>

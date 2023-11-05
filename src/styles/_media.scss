@@ -1,15 +1,15 @@
-@use "./vars" as *;
+@use "./vars";
 
 // MOBILE
 @mixin mobile-lg {
-  @media (min-width: $break-mobile-lg) {
+  @media (min-width: vars.$break-mobile-lg) {
     @content;
   }
 }
 
 // TABLET
 @mixin tablet {
-  @media (min-width: $break-tablet) {
+  @media (min-width: vars.$break-tablet) {
     @content;
   }
 }
@@ -19,14 +19,14 @@
   }
 }
 @mixin tablet-lg {
-  @media (min-width: $break-tablet-lg) {
+  @media (min-width: vars.$break-tablet-lg) {
     @content;
   }
 }
 
 // DESKTOP
 @mixin desktop {
-  @media (min-width: $break-desktop) {
+  @media (min-width: vars.$break-desktop) {
     @content;
   }
 }
