@@ -36,7 +36,7 @@ jobs:
       - name: Build static content
         run: npm run build
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v6
+        uses: actions/upload-pages-artifact@v5
         with:
           path: ./dist
 
